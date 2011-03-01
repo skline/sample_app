@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "LayoutLinks" do
   
   it  "should have" do
-    it "should have a HOme page at '/'" do
+    it "should have a Home page at '/'" do
       get '/'
       response.should have_selector('title', :key => "Home")
   end  
@@ -17,9 +17,15 @@ describe "LayoutLinks" do
     get '/contact'
     response.should have_selector('title', :key => "About")
   end
-  
   it "should have a Help page at '/help'" do
     get '/help'
     response.should have_selector('title', :key => "Help")
   end
+  it "should have a sign up age at '/signup'" do
+    get '/signup'
+    response.should have_selector('title', :content => "Sign up") 
+ end
+ end
+ 
 end
+
