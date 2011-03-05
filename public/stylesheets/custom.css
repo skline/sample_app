@@ -126,3 +126,10 @@ td.sidebar { width: 30%;
 .profile img.gravatar { border: 1px solid #999;
 	 					margin-bottom: -15px;
 }
+
+/* User sign page */
+
+div.field, div.actions{
+	margin-bottom:10px;
+	
+}
