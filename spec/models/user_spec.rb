@@ -9,6 +9,7 @@ describe User do
               :password => "foobar",
               :password_confirmation => "foobar"
                }  
+  
   end
   
   it "should create a new instance given a valid attribute" do
@@ -103,6 +104,43 @@ describe User do
       
       it "should set the encrpyed password attribute" do
         @user.encrypted_password.should_not be_blank
+      end
+      
+      it "should have a salt" do
+        @user.should respond_to(:has_password?)
+      end
+      
+  describe "has passwrod? method" do
+      it "should exit" do
+        @user.should respond_to(:has_password?)
+      end
         
+      it "should return true if the password match" do
+        @user.has_password?(@attr[:password]).should be_true
+      end
+      
+      it "should return false if the pass wordl don't match" do
+        @user.has_password?(@attr["invalid"]).should be_false
+      end
+    end
+    
+  describe "authenticate method" do
+    
+      it "should exist" do
+        User.should respond_to(:authenticate)
+      end
+      
+      it "should return nil on email password mismatch" do
+        User.authenticate(@attr[:email], "wrongpass").should be_nil
+      end
+      
+      it "should return nil for an email adress with no user" do
+        User.authenticate("bar@foo.com", @attr[:password]).should be_nil
+      end
+      
+      it "should return the user on a match" do
+        User.authenticate(@attr[:email], @attr[:password]).should ==@user
+      end
     end
   end
+end
